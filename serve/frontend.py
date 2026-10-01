@@ -545,8 +545,6 @@ class OutputParser:
         out = []
         if self.state == "call" and self.stream_tools and self.scall is not None:
             out += self._scan()                 # the output ended inside a call that was already announced
-            out += self._close_scan()
-            out.append(Event("tool_call", call=self.scall, complete=False))
             if self.ss == "done":               # only its </tool_call> is missing: the call itself is whole
                 out.append(Event("tool_call", call=self.scall))
             self.buf = ""
